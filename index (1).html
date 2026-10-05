@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>RepairAI - AI Product Repairability Advisor</title>
+<meta name="description" content="RepairAI helps you decide whether a damaged product is worth repairing: repairability score, parts and cost, repair guide, and repair-vs-replace advice.">
+<style>
+*{box-sizing:border-box}html{scroll-behavior:smooth}
+body{margin:0;font:17px/1.55 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;color:#fff;background:linear-gradient(160deg,#41368a,#2a2468) fixed;min-height:100vh}
+.wrap{max-width:1000px;margin:0 auto;padding:18px 16px 40px}
+.card{background:linear-gradient(135deg,#4b3f93,#5a4db0);border-radius:16px;padding:20px 24px 28px;margin-bottom:22px;overflow:hidden}
+nav{display:flex;flex-wrap:wrap;align-items:center;gap:6px 20px;margin-bottom:26px}
+nav b{margin-right:auto;font-size:1.25rem}nav a{color:#e6e1ff;text-decoration:none;padding:4px}
+nav a.pill{border:2px solid #8fe3ff;border-radius:99px;padding:4px 16px;color:#8fe3ff}
+.grid{display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center}
+h1{font-size:2.9rem;line-height:1.1;margin:0 0 12px}h2{font-size:2.1rem;line-height:1.15;margin:0 0 10px}
+h1 span,h2 span{color:#8fe3ff}p{color:#e6e1ff;margin:0 0 12px}
+.btn{display:inline-block;background:#8fe3ff;color:#1f1b4d;font-weight:700;text-decoration:none;border-radius:99px;padding:12px 26px;margin:6px 10px 0 0}
+.btn.o{background:none;border:2px solid #8fe3ff;color:#8fe3ff;padding:10px 24px}
+svg{width:100%;height:auto}
+.feat{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:22px}
+.f{background:#ffffff1f;border-radius:12px;padding:14px}.f b{display:block;color:#8fe3ff;margin-bottom:4px}.f span{color:#e6e1ff;font-size:.92rem}
+ol{list-style:none;counter-reset:s;padding:0;margin:0}ol li{counter-increment:s;position:relative;padding:5px 0 5px 34px}
+ol li::before{content:counter(s);position:absolute;left:0;top:6px;width:24px;height:24px;border-radius:50%;background:#8fe3ff;color:#1f1b4d;font-weight:700;font-size:.85rem;display:grid;place-items:center}
+.flow{display:grid;grid-template-columns:1fr auto 1fr auto 1fr;gap:10px;align-items:stretch;margin-top:18px}
+.flow div.s{background:#ffffff1f;border-radius:12px;padding:14px}.flow small{display:block;color:#8fe3ff;font-weight:700;letter-spacing:.06em;text-transform:uppercase;font-size:.75rem}
+.flow .ar{align-self:center;color:#8fe3ff;font-size:1.4rem}
+.tags{display:flex;flex-wrap:wrap;gap:8px;margin-top:14px}.tags span{border:1.5px solid #8fe3ff;color:#8fe3ff;border-radius:99px;padding:2px 12px;font-size:.88rem}
+footer{text-align:center;color:#cfc9f5;font-size:.9rem;margin-top:10px}footer a{color:#8fe3ff}
+@media(max-width:760px){.grid{grid-template-columns:1fr}h1{font-size:2.1rem}.flow{grid-template-columns:1fr}.flow .ar{transform:rotate(90deg);justify-self:center}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<div class="card" id="home">
+  <nav>
+    <b>🔧 RepairAI</b>
+    <a href="#about">About</a><a href="#features">Features</a><a href="#how">How it works</a><a href="#project">Project</a>
+    <a class="pill" href="#try">Try the app</a>
+  </nav>
+  <div class="grid">
+    <div>
+      <h1><span>Product Repairability </span>Advisor</h1>
+      <p>Find out if your phone, laptop or appliance can be repaired, what it will cost, and whether to repair or replace it.</p>
+      <a class="btn" href="#try">Try the app</a><a class="btn o" href="#about">Learn More</a>
+    </div>
+    <svg viewBox="0 0 420 320" role="img" aria-label="A laptop showing a repairability score next to a phone being repaired with a wrench">
+      <circle cx="215" cy="160" r="140" fill="#6a5fc0"/><circle cx="340" cy="64" r="24" fill="#8fe3ff" opacity=".35"/><circle cx="70" cy="60" r="8" fill="#8fe3ff"/><circle cx="386" cy="170" r="6" fill="#fff" opacity=".7"/>
+      <rect x="80" y="70" width="230" height="150" rx="12" fill="#2b2766"/><rect x="92" y="82" width="206" height="126" rx="6" fill="#bfe6ff"/>
+      <circle cx="150" cy="145" r="34" fill="none" stroke="#fff" stroke-width="10"/>
+      <circle cx="150" cy="145" r="34" fill="none" stroke="#4b3f93" stroke-width="10" stroke-linecap="round" stroke-dasharray="167 214" transform="rotate(-90 150 145)"/>
+      <text x="150" y="152" text-anchor="middle" font-size="20" font-weight="700" fill="#2b2766">78</text>
+      <rect x="206" y="108" width="80" height="10" rx="5" fill="#4b3f93"/><rect x="206" y="130" width="62" height="10" rx="5" fill="#8fa6ff"/><rect x="206" y="152" width="50" height="10" rx="5" fill="#8fa6ff"/><rect x="206" y="178" width="46" height="16" rx="8" fill="#5fd68a"/>
+      <path d="M60 224 H330 L316 238 H74 Z" fill="#c9b8ff"/>
+      <rect x="272" y="124" width="82" height="140" rx="14" fill="#f5f3ff" stroke="#2b2766" stroke-width="5"/><rect x="282" y="140" width="62" height="102" rx="6" fill="#d7e9ff"/>
+      <polyline points="292,142 308,176 298,196 318,238" fill="none" stroke="#2b2766" stroke-width="2.5"/>
+      <g transform="rotate(35 340 250)"><rect x="334" y="196" width="12" height="96" rx="6" fill="#ffb454"/><circle cx="340" cy="192" r="18" fill="#ffb454"/><rect x="334" y="168" width="12" height="22" fill="#6a5fc0"/></g>
+      <path d="M52 262 C30 232 48 198 92 196 C94 232 82 256 52 262Z" fill="#5fd68a"/><path d="M52 262 C60 240 72 222 88 206" stroke="#2f9e5f" stroke-width="3" fill="none"/>
+      <rect x="40" y="92" width="92" height="30" rx="15" fill="#fff"/><text x="86" y="112" text-anchor="middle" font-size="13" font-weight="700" fill="#2f9e5f">Repair ✓</text>
+    </svg>
+  </div>
+</div>
+
+<div class="card" id="about">
+  <h2><span>About </span>RepairAI</h2>
+  <p>RepairAI is an AI-powered advisor that helps you decide whether a damaged product is worth repairing. Describe your product and the problem, and RepairAI gives you a repairability score, the likely cause, the parts that may need replacing, a rough cost in rupees, step-by-step repair guidance, and a clear repair-or-replace recommendation.</p>
+  <p>Every product that is repaired instead of thrown away keeps electronic waste out of landfill and money in your pocket.</p>
+</div>
+
+<div class="card" id="features">
+  <h2><span>What you </span>get</h2>
+  <p>Everything you need to make a confident decision about a damaged product, in one place.</p>
+  <div class="feat">
+    <div class="f"><b>📊 AI Analysis</b><span>A repairability score out of 100 with the reasons behind it.</span></div>
+    <div class="f"><b>🧩 Cost &amp; Parts</b><span>The likely issue, the parts to replace, and a rough cost range.</span></div>
+    <div class="f"><b>🛠️ Repair Guide</b><span>Simple step-by-step instructions, with safety tips.</span></div>
+    <div class="f"><b>⚖️ Repair vs Replace</b><span>A side-by-side comparison so you can decide with confidence.</span></div>
+  </div>
+</div>
+
+<div class="card" id="how">
+  <h2><span>How it </span>works</h2>
+  <ol>
+    <li>Tell us about your product: what it is, how old it is, and what is wrong.</li>
+    <li>Get your AI repair assessment: score, likely cause, parts and cost.</li>
+    <li>Decide and save: compare repair with replace, then keep the result in your history.</li>
+  </ol>
+</div>
+
+<div class="card" id="project">
+  <h2><span>The </span>project</h2>
+  <p>RepairAI follows a simple input, process, output pattern. The score comes from seven repairability checks, each marked 1 to 5 and weighted: opening the product (25%), replacing the part that fails most (20%), reaching common parts (15%), spare parts availability (15%), repair guides (10%), software or lock-in blocks (10%) and special tools (5%).</p>
+  <div class="flow">
+    <div class="s"><small>Input</small>Product, age, warranty and a description of the problem</div>
+    <div class="ar">→</div>
+    <div class="s"><small>Process</small>AI analysis and the seven-check repairability rubric</div>
+    <div class="ar">→</div>
+    <div class="s"><small>Output</small>Score out of 100, parts and cost, repair guide, repair vs replace</div>
+  </div>
+  <div class="tags"><span>HTML</span><span>CSS</span><span>JavaScript</span><span>Claude AI</span></div>
+</div>
+
+<div class="card" id="try">
+  <h2><span>Try the </span>app</h2>
+  <p>The working app runs on claude.ai, so you need a free claude.ai account to use it.</p>
+  <a class="btn" id="app" href="https://claude.ai/artifact/AaVxmfigvJhLH7PWtyv4s2" target="_blank" rel="noopener">Open RepairAI</a>
+  <p style="margin-top:14px;font-size:.9rem">RepairAI gives general guidance and rough estimates. It is not a substitute for a professional inspection.</p>
+</div>
+
+<footer>Built by Aravind D M · <a href="https://aravinddm.github.io/portfolio/">Portfolio</a> · <a href="https://github.com/Aravinddm">GitHub</a></footer>
+</div>
+</body>
+</html>
